@@ -5,9 +5,12 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/actors/bullet.dart';
+import 'package:myapp/actors/player.dart';
 import 'package:myapp/bullet_hell.dart';
 
-class Enemy extends SpriteComponent with HasGameReference<BulletHellGame> {
+class Enemy extends SpriteComponent
+    with HasGameReference<BulletHellGame>, CollisionCallbacks {
   final int speed;
 
   Enemy({required this.speed});
@@ -25,6 +28,17 @@ class Enemy extends SpriteComponent with HasGameReference<BulletHellGame> {
 
     add(ColorEffect(Colors.red, EffectController(duration: 0)));
     add(RectangleHitbox());
+  }
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
+
+    if (other is Player) {
+      other.removeFromParent();
+    } else if (other is Bullet) {
+      removeFromParent();
+    }
   }
 
   @override

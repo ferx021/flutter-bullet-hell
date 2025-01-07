@@ -5,7 +5,8 @@ import 'package:flame/input.dart';
 import 'package:myapp/actors/enermy.dart';
 import 'package:myapp/actors/player.dart';
 
-class BulletHellGame extends FlameGame with HasKeyboardHandlerComponents {
+class BulletHellGame extends FlameGame
+    with HasKeyboardHandlerComponents, HasCollisionDetection {
   @override
   FutureOr<void> onLoad() async {
     await images.loadAll([
