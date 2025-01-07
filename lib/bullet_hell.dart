@@ -11,13 +11,11 @@ class BulletHellGame extends FlameGame with HasKeyboardHandlerComponents {
     await images.loadAll([
       'player.png',
     ]);
-
-    debugMode = true;
     initializeGame();
   }
 
   void initializeGame() {
     world.add(Player());
-    world.add(Enemy());
+    world.add(Enemy(speed: 1));
   }
 }
